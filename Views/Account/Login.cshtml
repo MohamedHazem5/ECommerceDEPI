@@ -1,0 +1,55 @@
+﻿@model ECommerce.Models.Dtos.LoginDto
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Login</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/css/style.css">
+
+    <!-- Boxicons CSS -->
+    <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+    <section class="container forms">
+        <div class="form login">
+            <div class="form-content">
+                <header>Login</header>
+                <form asp-action="Login" method="post">
+                    <div class="field input-field">
+                        <input type="email" asp-for="Email" placeholder="Email" class="input">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="field input-field">
+                        <input type="password" asp-for="Password" placeholder="Password" class="password">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="field button-field">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+
+                <div class="form-link">
+                    <span>Don't have an account? <a asp-controller="Account" asp-action="Register" class="link signup-link">Signup</a></span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+</body>
+</html>
