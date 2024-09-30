@@ -11,7 +11,7 @@ namespace ECommerce.Extentions
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
             // Seed Roles
-            string[] roleNames = { "Admin", "Customer" };
+            string[] roleNames = { "Admin", "Customer","Vendor"};
             foreach (var roleName in roleNames)
             {
                 if (!await roleManager.RoleExistsAsync(roleName))
@@ -21,7 +21,7 @@ namespace ECommerce.Extentions
             }
 
             // Seed Admin User
-            var adminEmail = "admin@admin.com";
+            var adminEmail = "admin@gmail.com";
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
             if (adminUser == null)
             {

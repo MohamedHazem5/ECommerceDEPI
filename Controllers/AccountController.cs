@@ -29,7 +29,7 @@ namespace ECommerce.Controllers
             if (!ModelState.IsValid) return View(loginDto);
             var user = await _userManager.Users.SingleOrDefaultAsync(x => x.Email == loginDto.Email);
             if (user == null) return RedirectToAction(nameof(Login));
-            var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Password, true, false);
+            var result = await _signInManager.PasswordSignInAsync(user,loginDto.Password, true, false);
             if (!result.Succeeded) return View(loginDto);
 
             return RedirectToAction("Index", "Home");
