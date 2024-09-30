@@ -27,6 +27,7 @@ namespace ECommerce.Controllers
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
             //fdgdfgdfgd
+            // testtttttttttttttttttt
             if (!ModelState.IsValid) return View(loginDto);
             var user = await _userManager.Users.SingleOrDefaultAsync(x => x.Email == loginDto.Email);
             if (user == null) return RedirectToAction(nameof(Login));
