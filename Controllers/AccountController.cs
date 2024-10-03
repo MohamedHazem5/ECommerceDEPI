@@ -26,7 +26,6 @@ namespace ECommerce.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            //fdgdfgdfgd
             if (!ModelState.IsValid) return View(loginDto);
             var user = await _userManager.Users.SingleOrDefaultAsync(x => x.Email == loginDto.Email);
             if (user == null) return RedirectToAction(nameof(Login));
@@ -53,14 +52,14 @@ namespace ECommerce.Controllers
                 return View(registerDto);
             }
 
-            var user = new User
+            var user = new Models.Users.User()
             {
                 UserName = registerDto.Email,
                 Email = registerDto.Email,
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
                 RegisteredDate = DateTime.UtcNow,
-                EmailConfirmed = false,
+                EmailConfirmed = true,
 
             };
 

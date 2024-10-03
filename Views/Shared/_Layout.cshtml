@@ -36,17 +36,24 @@
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Users">Users</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Users</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Vendors">Vendors</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vendor" asp-action="Index">Vendors</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Customers">Customers</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Customers</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">Privacy</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Categorie" asp-action="Index">Categorie</a>
+                            </li>
+                            
                         }
                         else if (SignInManager.IsSignedIn(User) && User.IsInRole("Customer"))
                         {
@@ -55,6 +62,9 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Shippings">Shippings</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
                             </li>
                         }
                         else if (SignInManager.IsSignedIn(User) && User.IsInRole("Vendor"))
@@ -66,6 +76,10 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Reports">Reports</a>
                             </li>
                         }
+                        @* ------------------------------------------test *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         @if (SignInManager.IsSignedIn(User))
@@ -73,6 +87,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Logout">Logout</a>
                             </li>
+                            if (SignInManager.IsSignedIn(User) && User.IsInRole("Customer"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="ViewCart">View Cart</a>
+                                </li>
+                            }
                         }
                         else
                         {
@@ -83,6 +103,11 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                         }
+                        <li class="nav-item">
+                            @* ------------------------------------------test *@
+                           
+                            <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="ViewCart">View Cart</a>
+                        </li>
                     </ul>
                 </div>
             </div>
