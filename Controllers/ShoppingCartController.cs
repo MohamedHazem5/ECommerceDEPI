@@ -78,10 +78,10 @@ namespace ECommerce.Controllers
                     Id = item.Id,
                     ProductId=item.product.Id,
                     Quantity=item.Quantitiy,
-                    OrderId=1,
-                    UnitPrice=item.product.Price*item.Quantitiy
+                    //OrderId=1,
+                    UnitPrice=Convert.ToDecimal(item.product.Price*item.Quantitiy)
                 });
-                sumtotal =+ Convert.ToDecimal(item.product.Price * item.Quantitiy);
+                sumtotal =sumtotal + Convert.ToDecimal(item.product.Price * item.Quantitiy);
                 _db.OrderItems.AddRange(orderitemincart);
             }
             var totals = new Order();
