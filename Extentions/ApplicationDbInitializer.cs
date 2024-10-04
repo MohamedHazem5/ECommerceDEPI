@@ -40,6 +40,26 @@ namespace ECommerce.Extentions
                     await userManager.AddToRoleAsync(admin, "Admin");
                 }
             }
+            // Seed Admin User
+            var customer1Email = "customer1@gmail.com";
+            var customer1User = await userManager.FindByEmailAsync(customer1Email);
+            if (customer1User == null)
+            {
+                var customer1 = new User
+                {
+                    UserName = customer1Email.Substring(0, customer1Email.IndexOf("@")),
+                    Email = customer1Email,
+                    FirstName = "customer1",
+                    LastName = "customer1",
+                    EmailConfirmed = true
+                };
+
+                var result = await userManager.CreateAsync(customer1, "Pa$$w0rd");
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(customer1, "Customer");
+                }
+            }
         }
     }
 }
