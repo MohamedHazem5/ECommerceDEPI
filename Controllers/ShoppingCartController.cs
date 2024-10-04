@@ -2,16 +2,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using ECommerce.Models.Orders;
+using Microsoft.AspNetCore.Identity;
+using ECommerce.Models.Users;
 namespace ECommerce.Controllers
 {
     public class ShoppingCartController : Controller
     {
         private readonly storeContext _db;
         private  List<ShoppingCartItem> _items;
-        public ShoppingCartController(storeContext context)
+        private readonly UserManager<User> _userManager;
+        public ShoppingCartController(storeContext context, UserManager<User> userManager)
         {
-            _db=context;
-            _items=new List<ShoppingCartItem>();
+            _db = context;
+            _items = new List<ShoppingCartItem>();
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
@@ -62,7 +66,7 @@ namespace ECommerce.Controllers
             return RedirectToAction("ViewCart");
         }
         
-        public IActionResult Purchase()
+        public async Task<IActionResult> Purchase()
         {
             var _cartItems = HttpContext.Session.Get<List<ShoppingCartItem>>("Cart") ?? new List<ShoppingCartItem>();
             var orderitemincart = new List<OrderItem>();
@@ -79,10 +83,10 @@ namespace ECommerce.Controllers
                 });
                 sumtotal =+ Convert.ToDecimal(item.product.Price * item.Quantitiy);
                 _db.OrderItems.AddRange(orderitemincart);
-
             }
             var totals = new Order();
-            totals.CustomerId = 1;
+            var user = await _userManager.GetUserAsync(User);
+            totals.UserId = user.Id;
             totals.OrderDate = DateTime.Now;
             totals.OrderItems= orderitemincart;
             totals.TotalAmount=sumtotal;

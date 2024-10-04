@@ -82,7 +82,7 @@ namespace ECommerce.Controllers
             {
                 return NotFound();
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Email", order.CustomerId);
+            ViewData["UserId"] = new SelectList(_context.Customers, "Id", "Email", order.UserId);
             return View(order);
         }
 
@@ -118,7 +118,7 @@ namespace ECommerce.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CustomerId"] = new SelectList(_context.Customers, "Id", "Email", order.CustomerId);
+            ViewData["UserId"] = new SelectList(_context.Customers, "Id", "Email", order.UserId);
             return View(order);
         }
 

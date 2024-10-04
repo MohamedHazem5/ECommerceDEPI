@@ -1,7 +1,9 @@
 ﻿using ECommerce.Models.Customers;
 using ECommerce.Models.Products;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace ECommerce.Models
 {
+    [NotMapped]
     public class ShoppingCartItem
     {
         public int Id { get; set; }
