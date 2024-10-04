@@ -25,9 +25,15 @@ namespace ECommerce.Controllers
         public IActionResult AddtoCart(int id)
         {
             var _product=_db.Products.Find(id);
+            
             var _cartItems=HttpContext.Session.Get<List<ShoppingCartItem>>("Cart")??new List<ShoppingCartItem>();
-            var extingproduct= _cartItems.FirstOrDefault(x => x.product.Id == id);
-            if(extingproduct != null)
+            var extingproduct = _cartItems.FirstOrDefault(x => x.product.Id == id);
+            if (_product.QuantityInStock < extingproduct.Quantitiy || _product.IsActive==false)
+            {
+                
+                return RedirectToAction("Details", "Product", id);
+            }
+            if (extingproduct != null)
             {
                 extingproduct.Quantitiy++;
             }
@@ -37,10 +43,11 @@ namespace ECommerce.Controllers
                 {
                     Quantitiy = 1,
                     product = _product
-                }); 
+                });
             }
             HttpContext.Session.Set("Cart", _cartItems);
-            return RedirectToAction("Index","Product");
+            return RedirectToAction("Index", "Product");
+
         }
         public IActionResult ViewCart()
         {
@@ -71,8 +78,11 @@ namespace ECommerce.Controllers
             var _cartItems = HttpContext.Session.Get<List<ShoppingCartItem>>("Cart") ?? new List<ShoppingCartItem>();
             var orderitemincart = new List<OrderItem>();
             decimal sumtotal = 0;
+            
             foreach (var item in _cartItems)
             {
+                var product = _db.Products.Find(item.product.Id);
+                product.QuantityInStock -= item.Quantitiy;
                 orderitemincart.Add(new OrderItem
                 {
                     Id = item.Id,
