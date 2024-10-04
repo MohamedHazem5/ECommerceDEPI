@@ -53,7 +53,7 @@ namespace ECommerce.Models
         public DbSet<Products.Category> Categorys { get; set; }
 
         public DbSet<Products.Product> Products { get; set; }
-        public DbSet<Products.ProductImage> ProductImages { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         public DbSet<Products.ProductReview> ProductReviews { get; set; }
         public DbSet<Shippings.Shipping> Shippings { get; set; }

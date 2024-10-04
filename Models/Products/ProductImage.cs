@@ -1,20 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using ECommerce.Models.Products;
+using System;
+using System.Collections.Generic;
 
-namespace ECommerce.Models.Products
+namespace ECommerce.Models
 {
-    public class ProductImage
+
+    public partial class ProductImage
     {
-        [Key]
         public int Id { get; set; }
-
-        [Required]
-        [StringLength(255)]
-        public string ImageUrl { get; set; }
-
-        [ForeignKey("ProductId")]
-        public Product Product { get; set; }
-        public int ProductId { get; set; }
+        public int ProductID { get; set; }
+        public byte[] ImageData { get; set; }
+        public virtual Product Product { get; set; } = null!;
     }
-
 }

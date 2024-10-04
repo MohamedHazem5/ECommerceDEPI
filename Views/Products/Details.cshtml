@@ -1,0 +1,34 @@
+﻿@model ECommerce.Models.Products.Product
+
+<h2>Product Details</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Description</p>
+        <p><strong>Price:</strong> @Model.Price.ToString("C")</p>
+        <p><strong>Quantity In Stock:</strong> @Model.QuantityInStock</p>
+        <p><strong>Vendor:</strong> @Model.Vendor?.Name</p>
+        <p><strong>Category:</strong> @Model.Category?.Name</p>
+    </div>
+</div>
+
+<h4>Product Images</h4>
+<div class="row">
+    @if (Model.ProductImages != null && Model.ProductImages.Any())
+    {
+        foreach (var image in Model.ProductImages)
+        {
+            <div class="col-md-4 mb-3">
+                <img src="data:image/png;base64,@Convert.ToBase64String(image.ImageData)"
+                     alt="Product Image"
+                     class="img-fluid"
+                     style="width: 100%; height: auto;" />
+            </div>
+        }
+    }
+    else
+    {
+        <p>No images available for this product.</p>
+    }
+</div>

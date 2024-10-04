@@ -4,6 +4,7 @@ using ECommerce.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerce.Migrations
 {
     [DbContext(typeof(storeContext))]
-    partial class storeContextModelSnapshot : ModelSnapshot
+    [Migration("20241004115803_test6")]
+    partial class test6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,6 +122,7 @@ namespace ECommerce.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("StreetAddress2")
+                        .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
@@ -207,6 +211,7 @@ namespace ECommerce.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TransactionId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -225,6 +230,7 @@ namespace ECommerce.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<byte[]>("ImageData")
+                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<int>("ProductID")
@@ -340,6 +346,7 @@ namespace ECommerce.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Carrier")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EstimatedDeliveryDays")

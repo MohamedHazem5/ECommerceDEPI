@@ -52,6 +52,11 @@ namespace ECommerce.Controllers
                 ModelState.AddModelError("Email", "The Email is Taken");
                 return View(registerDto);
             }
+            if(registerDto.Password.Length <6  )
+            {
+                ModelState.AddModelError("Email", "PasswordTooShort,PasswordRequiresLower,PasswordRequiresUpper");
+                return View(registerDto);
+            }
 
             var user = new User
             {
