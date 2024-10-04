@@ -1,6 +1,7 @@
 ﻿using ECommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using ECommerce.Models.Orders;
 namespace ECommerce.Controllers
 {
     public class ShoppingCartController : Controller
@@ -59,6 +60,36 @@ namespace ECommerce.Controllers
             HttpContext.Session.Set("Cart", _cartItems);
 
             return RedirectToAction("ViewCart");
+        }
+        
+        public IActionResult Purchase()
+        {
+            var _cartItems = HttpContext.Session.Get<List<ShoppingCartItem>>("Cart") ?? new List<ShoppingCartItem>();
+            var orderitemincart = new List<OrderItem>();
+            decimal sumtotal = 0;
+            foreach (var item in _cartItems)
+            {
+                orderitemincart.Add(new OrderItem
+                {
+                    Id = item.Id,
+                    ProductId=item.product.Id,
+                    Quantity=item.Quantitiy,
+                    OrderId=1,
+                    UnitPrice=item.product.Price*item.Quantitiy
+                });
+                sumtotal =+ Convert.ToDecimal(item.product.Price * item.Quantitiy);
+                _db.OrderItems.AddRange(orderitemincart);
+
+            }
+            var totals = new Order();
+            totals.CustomerId = 1;
+            totals.OrderDate = DateTime.Now;
+            totals.OrderItems= orderitemincart;
+            totals.TotalAmount=sumtotal;
+            _db.Orders.Add(totals);
+            _db.SaveChanges();
+            HttpContext.Session.Set("Cart", new List<ShoppingCartItem>());
+            return RedirectToAction("Index","Home");
         }
     }
 }
