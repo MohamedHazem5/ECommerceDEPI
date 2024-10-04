@@ -4,14 +4,15 @@ using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddMemoryCache();
+builder.Services.AddSession();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<storeContext>(co => co.UseSqlServer(builder.Configuration.GetConnectionString("storecon")));
 builder.Services.AddIdentityService(builder.Configuration);
 
 var app = builder.Build();
-
+app.UseSession();
 
 // Seed roles and admin user
 using (var scope = app.Services.CreateScope())

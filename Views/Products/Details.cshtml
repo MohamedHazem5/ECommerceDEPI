@@ -1,7 +1,11 @@
 ﻿@model ECommerce.Models.Products.Product
-
+@using ECommerce.Models.Users
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject RoleManager<Role> RoleManager
 <h2>Product Details</h2>
-
+<input type="hidden" value="@Model.Id" />
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
@@ -12,7 +16,10 @@
         <p><strong>Category:</strong> @Model.Category?.Name</p>
     </div>
 </div>
-
+@if ( !(User.IsInRole("Admin") || User.IsInRole("Vendor")))
+{
+    <a asp-controller="ShoppingCart" asp-action="AddtoCart" asp-route-id="@Model.Id" class="btn btn-primary">Add To Cart</a>
+}
 <h4>Product Images</h4>
 <div class="row">
     @if (Model.ProductImages != null && Model.ProductImages.Any())

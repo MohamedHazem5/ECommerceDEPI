@@ -1,0 +1,52 @@
+﻿@model ShoppingCartViewItem
+
+@using ECommerce.Models.Users
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject RoleManager<Role> RoleManager
+
+<h1>Shopping Cart</h1>
+<table class="table">
+    <thead>
+        <tr>
+
+            <td>Product Name</td>
+            <td>Product Price</td>
+            <td>Quantity</td>
+            <td>Total Price</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Items)
+        {
+            <tr>
+               @*  <td>@item.product.Category.Name</td> *@
+                <td>@item.product.Name</td>
+                <td>@item.product.Price</td>
+                <td>@item.Quantitiy</td>
+                <td>@((item.product.Price*item.Quantitiy).ToString("C"))</td>
+                <input type="hidden" value="@item.product.Id"/>
+                <td><a asp-controller="ShoppingCart" asp-action="AddtoCart" asp-route-id="@item.product.Id" class="btn btn-outline-primary">Add</a>|
+                    <a asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-id="@item.product.Id" class="btn btn-danger">Remove</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td>Total: </td>
+            <td>@Model.TotalPrice?.ToString("C")</td>
+        </tr>
+        
+    </tbody>
+</table>
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Customer"))
+{
+    <tr><a asp-controller="ShoppingCart" asp-action="Purchase" class="btn btn-info">proceed to purchase</a></tr>
+}
+else
+{
+    <tr><a asp-controller="Account" asp-action="Login" class="btn btn-info">proceed to purchase</a></tr>
+
+}
