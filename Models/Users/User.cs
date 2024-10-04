@@ -1,4 +1,4 @@
-﻿using ECommerce.Models.Customers;
+﻿
 using ECommerce.Models.Orders;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
@@ -18,7 +18,7 @@ namespace ECommerce.Models.Users
 
         [Required]
         public DateTime RegisteredDate { get; set; }
-        public string? ImgaeUrl { get; set; }
+        public string? ImageUrl { get; set; }
         public ICollection<UserRole> UserRoles { get; set; }
 
 

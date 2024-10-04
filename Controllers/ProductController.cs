@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.DataProtection;
 using ECommerce.Models.Products;
 using ECommerce.Models.Vendors;
 using ECommerce.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.Controllers
 {
@@ -28,7 +29,6 @@ namespace ECommerce.Controllers
             var storeDbContext = _context.Products.Include(p => p.Category).Include(p => p.Vendor);
             return View(await storeDbContext.ToListAsync());
         }
-
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -50,17 +50,18 @@ namespace ECommerce.Controllers
 
             return View(product);
         }
-
+        [Authorize(Roles = "Admin,Vendor")]
         // GET: Products/Create
         public IActionResult Create()
         {
             // Populate the dropdown list with vendors
             ViewBag.Vendors = new SelectList(_context.Vendor.ToList(), "Id", "Name"); // Id is used for saving, Name is shown to the user
                                                                                        // Populate the dropdown list with categories
-            ViewBag.Categories = new SelectList(_context.Categorys.ToList(), "Id", "Name"); // Id is used for saving, Name is shown to the user
+            ViewBag.Categories = new SelectList(_context.Categories.ToList(), "Id", "Name"); // Id is used for saving, Name is shown to the user
 
             return View();
         }
+        [Authorize(Roles = "Admin,Vendor")]
 
         // POST: Products/Create
         [HttpPost]
@@ -104,10 +105,11 @@ namespace ECommerce.Controllers
 
 
             ViewBag.Vendors = new SelectList(_context.Vendor.ToList(), "Id", "Name");
-            ViewBag.Categories = new SelectList(_context.Categorys.ToList(), "Id", "Name");
+            ViewBag.Categories = new SelectList(_context.Categories.ToList(), "Id", "Name");
 
             return View(product);
         }
+        [Authorize(Roles = "Admin,Vendor")]
 
         public async Task<IActionResult> Edit(int id)
         {
@@ -122,10 +124,11 @@ namespace ECommerce.Controllers
 
             // Populate vendors and categories for the dropdown lists
             ViewBag.Vendors = new SelectList(_context.Vendor, "Id", "Name", product.VendorId);
-            ViewBag.Categories = new SelectList(_context.Categorys, "Id", "Name", product.CategoryId);
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
 
             return View(product);
         }
+        [Authorize(Roles = "Admin,Vendor")]
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -172,13 +175,14 @@ namespace ECommerce.Controllers
 
             // If ModelState is invalid, repopulate ViewBag
             ViewBag.Vendors = new SelectList(_context.Vendor, "Id", "Name", updatedProduct.VendorId);
-            ViewBag.Categories = new SelectList(_context.Categorys, "Id", "Name", updatedProduct.CategoryId);
+            ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", updatedProduct.CategoryId);
             return View(updatedProduct);
         }
     
-    
-    // GET: Products/Delete/5
-    public async Task<IActionResult> Delete(int? id)
+        [Authorize(Roles = "Admin,Vendor")]
+
+        // GET: Products/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {

@@ -3,6 +3,7 @@ using ECommerce.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices;
 
 namespace ECommerce.Controllers
 {
@@ -15,6 +16,7 @@ namespace ECommerce.Controllers
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            
         }
 
         [HttpGet]
@@ -26,7 +28,6 @@ namespace ECommerce.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {
-            //fdgdfgdfgd
             if (!ModelState.IsValid) return View(loginDto);
             var user = await _userManager.Users.SingleOrDefaultAsync(x => x.Email == loginDto.Email);
             if (user == null) return RedirectToAction(nameof(Login));

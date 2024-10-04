@@ -43,14 +43,11 @@ namespace ECommerce.Models
         public DbSet<Carts.Cart> Carts { get; set; }
         public DbSet<Carts.CartItem> CartItems { get; set; }
 
-        public DbSet<Customers.Customer> Customers { get; set; }
-        public DbSet<Customers.CustomerAddress> CustomerAddresss { get; set; }
-
         public DbSet<Orders.Order> Orders { get; set; }
         public DbSet<Orders.OrderItem> OrderItems { get; set; }
 
         public DbSet<Payments.Payment> Payments { get; set; }
-        public DbSet<Products.Category> Categorys { get; set; }
+        public DbSet<Products.Category> Categories { get; set; }
 
         public DbSet<Products.Product> Products { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }

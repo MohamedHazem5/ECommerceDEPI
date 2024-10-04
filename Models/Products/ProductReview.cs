@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using ECommerce.Models.Customers;
+using ECommerce.Models.Users;
+
 namespace ECommerce.Models.Products
 {
     public class ProductReview
@@ -21,9 +22,9 @@ namespace ECommerce.Models.Products
         public Product Product { get; set; }
         public int ProductId { get; set; }
 
-        [ForeignKey("CustomerId")]
-        public Customer Customer { get; set; }
-        public int CustomerId { get; set; }
+        [ForeignKey("UserId")]
+        public User Customer { get; set; }
+        public int UserId { get; set; }
     }
 
 }

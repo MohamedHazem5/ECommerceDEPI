@@ -10,9 +10,11 @@ using ECommerce.Models.Vendors;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Identity;
 using ECommerce.Models.Users;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class VendorController : Controller
     {
         private readonly storeContext _context;

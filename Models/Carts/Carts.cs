@@ -1,7 +1,8 @@
-﻿using ECommerce.Models.Customers;
+﻿
 using ECommerce.Models.Products;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using ECommerce.Models.Users;
 
 namespace ECommerce.Models.Carts
 {
@@ -10,9 +11,9 @@ namespace ECommerce.Models.Carts
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("CustomerId")]
-        public Customer Customer { get; set; }
-        public int CustomerId
+        [ForeignKey("UserId")]
+        public User Customer { get; set; }
+        public int UserId
         {
             get; set;
         }

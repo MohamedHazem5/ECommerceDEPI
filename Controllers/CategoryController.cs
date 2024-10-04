@@ -9,9 +9,12 @@ using ECommerce.Models.Products;
 using ECommerce.Models.Vendors;
 using ECommerce.Models;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ECommerce.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class CategoryController : Controller
     {
         private readonly storeContext _context;
@@ -24,7 +27,7 @@ namespace ECommerce.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Categorys.ToListAsync());
+            return View(await _context.Categories.ToListAsync());
         }
 
         // GET: Categories/Details/5
@@ -35,7 +38,7 @@ namespace ECommerce.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categorys
+            var category = await _context.Categories
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
@@ -75,7 +78,7 @@ namespace ECommerce.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categorys.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -126,7 +129,7 @@ namespace ECommerce.Controllers
                 return NotFound();
             }
 
-            var category = await _context.Categorys
+            var category = await _context.Categories
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (category == null)
             {
@@ -141,10 +144,10 @@ namespace ECommerce.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Categorys.FindAsync(id);
+            var category = await _context.Categories.FindAsync(id);
             if (category != null)
             {
-                _context.Categorys.Remove(category);
+                _context.Categories.Remove(category);
             }
 
             await _context.SaveChangesAsync();
@@ -153,7 +156,7 @@ namespace ECommerce.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Categorys.Any(e => e.Id == id);
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }
