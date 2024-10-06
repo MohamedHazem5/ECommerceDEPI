@@ -10,6 +10,8 @@ namespace ECommerce.Extentions
             var roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
+            var _context = serviceProvider.GetRequiredService<storeContext>();
+
             // Seed Roles
             string[] roleNames = { "Admin", "Customer","Vendor"};
             foreach (var roleName in roleNames)
@@ -124,6 +126,41 @@ namespace ECommerce.Extentions
                     await userManager.AddToRoleAsync(vendor2, "Vendor");
                 }
             }
+
+            #region Add Categories
+            Category category1 = new Category
+            {
+                Name = "Category1",
+            };
+            var category1_response = await _context.Categories
+                                        .FirstOrDefaultAsync(x => x.Name == category1.Name);
+            if(category1_response == null)
+                _context.Categories.Add(category1);
+
+            Category category2 = new Category
+            {
+                Name = "Category2",
+            };
+            var category2_response = await _context.Categories
+                                        .FirstOrDefaultAsync(x => x.Name == category2.Name);
+
+            if (category2_response == null)
+                _context.Categories.Add(category2);
+
+            Category category3 = new Category
+            {
+                Name = "Category3",
+            };
+            var category3_response = await _context.Categories
+                                        .FirstOrDefaultAsync(x => x.Name == category3.Name);
+
+            if (category3_response == null)
+                _context.Categories.Add(category3);
+
+            #endregion
+
+            await _context.SaveChangesAsync();
+
         }
     }
 }
