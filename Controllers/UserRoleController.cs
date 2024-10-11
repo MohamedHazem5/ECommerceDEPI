@@ -15,9 +15,9 @@ namespace ECommerce.Controllers
     [Authorize(Roles = "Admin")]
     public class UserRoleController : Controller
     {
-        private readonly storeContext _context;
+        private readonly StoreContext _context;
         private readonly UserManager<User> _userManager;
-        public UserRoleController(storeContext context, UserManager<User> userManager)
+        public UserRoleController(StoreContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -26,8 +26,8 @@ namespace ECommerce.Controllers
         // GET: UserRole
         public async Task<IActionResult> Index()
         {
-            var storeContext = _context.UserRoles.Include(u => u.Role).Include(u => u.User);
-            return View(await storeContext.ToListAsync());
+            var StoreContext = _context.UserRoles.Include(u => u.Role).Include(u => u.User);
+            return View(await StoreContext.ToListAsync());
         }
 
         // GET: UserRole/Edit/5

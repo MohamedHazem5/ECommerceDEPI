@@ -16,10 +16,10 @@ namespace ECommerce.Controllers
     [Authorize(Roles = "Admin,Customer")]
     public class OrdersController : Controller
     {
-        private readonly storeContext _context;
+        private readonly StoreContext _context;
         private readonly UserManager<User> _userManager;
 
-        public OrdersController(storeContext context,
+        public OrdersController(StoreContext context,
                                 UserManager<User> userManager)
         {
             _context = context;

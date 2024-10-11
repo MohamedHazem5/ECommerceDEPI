@@ -1,7 +1,10 @@
-﻿using ECommerce.Models.Users;
+﻿using ECommerce.Models;
+using ECommerce.Models.Products;
+using ECommerce.Models.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-namespace ECommerce.Extentions
+namespace ECommerce.Extensions
 {
     public static class ApplicationDbInitializer
     {
@@ -10,7 +13,7 @@ namespace ECommerce.Extentions
             var roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
-            var _context = serviceProvider.GetRequiredService<storeContext>();
+            var _context = serviceProvider.GetRequiredService<StoreContext>();
 
             // Seed Roles
             string[] roleNames = { "Admin", "Customer","Vendor"};

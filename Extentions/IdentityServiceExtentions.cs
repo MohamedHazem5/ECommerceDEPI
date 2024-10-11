@@ -3,7 +3,7 @@ using ECommerce.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using System.Data;
 
-namespace ECommerce.Extentions
+namespace ECommerce.Extensions
 {
     public static class IdentityServiceExtentions
     {
@@ -19,7 +19,7 @@ namespace ECommerce.Extentions
              .AddRoleManager<RoleManager<Role>>()
              .AddSignInManager<SignInManager<User>>()
              .AddRoleValidator<RoleValidator<Role>>()
-             .AddEntityFrameworkStores<storeContext>()
+             .AddEntityFrameworkStores<StoreContext>()
              .AddDefaultTokenProviders();
             services.AddAuthentication(options =>
             {

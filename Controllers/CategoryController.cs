@@ -17,9 +17,9 @@ namespace ECommerce.Controllers
 
     public class CategoryController : Controller
     {
-        private readonly storeContext _context;
+        private readonly StoreContext _context;
         private readonly IDataProtector protector;
-        public CategoryController(storeContext context)
+        public CategoryController(StoreContext context)
         {
             _context = context;
         }

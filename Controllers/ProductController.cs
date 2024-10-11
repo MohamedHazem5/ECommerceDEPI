@@ -15,9 +15,9 @@ namespace ECommerce.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly storeContext _context;
+        private readonly StoreContext _context;
 
-        public ProductsController(storeContext context,IDataProtectionProvider provider)
+        public ProductsController(StoreContext context,IDataProtectionProvider provider)
         {
             _context = context;
             

@@ -1,4 +1,4 @@
-using ECommerce.Extentions;
+using ECommerce.Extensions;
 using ECommerce.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +8,7 @@ builder.Services.AddMemoryCache();
 builder.Services.AddSession();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<storeContext>(co => co.UseSqlServer(builder.Configuration.GetConnectionString("storecon")));
+builder.Services.AddDbContext<StoreContext>(co => co.UseSqlServer(builder.Configuration.GetConnectionString("storecon")));
 builder.Services.AddIdentityService(builder.Configuration);
 
 var app = builder.Build();

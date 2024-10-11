@@ -8,10 +8,10 @@ namespace ECommerce.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        private readonly storeContext _db;
+        private readonly StoreContext _db;
         private  List<ShoppingCartItem> _items;
         private readonly UserManager<User> _userManager;
-        public ShoppingCartController(storeContext context, UserManager<User> userManager)
+        public ShoppingCartController(StoreContext context, UserManager<User> userManager)
         {
             _db = context;
             _items = new List<ShoppingCartItem>();

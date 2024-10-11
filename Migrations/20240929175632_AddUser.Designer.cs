@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ECommerce.Migrations
 {
-    [DbContext(typeof(storeContext))]
+    [DbContext(typeof(StoreContext))]
     [Migration("20240929175632_AddUser")]
     partial class AddUser
     {

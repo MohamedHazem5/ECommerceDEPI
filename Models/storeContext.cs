@@ -6,12 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Models
 {
-    public class storeContext : IdentityDbContext<User, Role, int,
+    public class StoreContext : IdentityDbContext<User, Role, int,
     IdentityUserClaim<int>, UserRole, IdentityUserLogin<int>,
     IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
     
-        public storeContext(DbContextOptions options) : base(options)
+        public StoreContext(DbContextOptions options) : base(options)
         {
 
         }

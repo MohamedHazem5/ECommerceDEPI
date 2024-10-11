@@ -17,10 +17,10 @@ namespace ECommerce.Controllers
     [Authorize(Roles = "Admin")]
     public class VendorController : Controller
     {
-        private readonly storeContext _context;
+        private readonly StoreContext _context;
         private readonly UserManager<User> _userManager;
 
-        public VendorController(storeContext context, UserManager<User> userManager)
+        public VendorController(StoreContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
