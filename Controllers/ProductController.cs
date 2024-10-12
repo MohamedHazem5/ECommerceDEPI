@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
 using ECommerce.Models.Products;
-using ECommerce.Models.Vendors;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Authorization;
 
@@ -26,7 +25,7 @@ namespace ECommerce.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var storeDbContext = _context.Products.Include(p => p.Category).Include(p => p.Vendor);
+            var storeDbContext = _context.Products.Include(p => p.Category).Include(p => p.User);
             return View(await storeDbContext.ToListAsync());
         }
         // GET: Products/Details/5
@@ -39,7 +38,7 @@ namespace ECommerce.Controllers
 
             var product = await _context.Products
                 .Include(p => p.Category)
-                .Include(p => p.Vendor)
+                .Include(p => p.User)
                 .Include(p => p.ProductImages) // Include ProductImages to access them
                 .FirstOrDefaultAsync(m => m.Id == id);
 
@@ -54,8 +53,8 @@ namespace ECommerce.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
-            // Populate the dropdown list with vendors
-            ViewBag.Vendors = new SelectList(_context.Vendor.ToList(), "Id", "Name"); // Id is used for saving, Name is shown to the user
+            // Populate the dropdown list with Users
+            ViewBag.Users = new SelectList(_context.Users.ToList(), "Id", "Name"); // Id is used for saving, Name is shown to the user
                                                                                        // Populate the dropdown list with categories
             ViewBag.Categories = new SelectList(_context.Categories.ToList(), "Id", "Name"); // Id is used for saving, Name is shown to the user
 
@@ -66,7 +65,7 @@ namespace ECommerce.Controllers
         // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,QuantityInStock,IsActive,CategoryId,VendorId")] Product product, List<IFormFile> images)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Price,QuantityInStock,IsActive,CategoryId,UserId")] Product product, List<IFormFile> images)
         {
 
             // Save product details
@@ -104,13 +103,14 @@ namespace ECommerce.Controllers
             return RedirectToAction(nameof(Index));
 
 
-            ViewBag.Vendors = new SelectList(_context.Vendor.ToList(), "Id", "Name");
+            ViewBag.Users = new SelectList(_context.Users.ToList(), "Id", "Name");
             ViewBag.Categories = new SelectList(_context.Categories.ToList(), "Id", "Name");
 
             return View(product);
         }
-        [Authorize(Roles = "Admin,Vendor")]
 
+
+        [Authorize(Roles = "Admin,Vendor")]
         public async Task<IActionResult> Edit(int id)
         {
             var product = await _context.Products
@@ -122,8 +122,8 @@ namespace ECommerce.Controllers
                 return NotFound();
             }
 
-            // Populate vendors and categories for the dropdown lists
-            ViewBag.Vendors = new SelectList(_context.Vendor, "Id", "Name", product.VendorId);
+            // Populate Users and categories for the dropdown lists
+            ViewBag.Users = new SelectList(_context.Users, "Id", "Name", product.UserId);
             ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
 
             return View(product);
@@ -132,7 +132,7 @@ namespace ECommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,QuantityInStock,IsActive,VendorId,CategoryId")] Product updatedProduct, IList<IFormFile> ImageUploads)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Price,QuantityInStock,IsActive,UserId,CategoryId")] Product updatedProduct, IList<IFormFile> ImageUploads)
         {
             if (id != updatedProduct.Id)
             {
@@ -174,7 +174,7 @@ namespace ECommerce.Controllers
 
 
             // If ModelState is invalid, repopulate ViewBag
-            ViewBag.Vendors = new SelectList(_context.Vendor, "Id", "Name", updatedProduct.VendorId);
+            ViewBag.Users = new SelectList(_context.Users, "Id", "Name", updatedProduct.UserId);
             ViewBag.Categories = new SelectList(_context.Categories, "Id", "Name", updatedProduct.CategoryId);
             return View(updatedProduct);
         }
@@ -191,7 +191,7 @@ namespace ECommerce.Controllers
 
             var product = await _context.Products
                 .Include(p => p.Category)
-                .Include(p => p.Vendor)
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
             {

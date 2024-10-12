@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using ECommerce.Models.Vendors;
+using ECommerce.Models.Users;
 
 namespace ECommerce.Models.Products
 {
@@ -31,12 +31,12 @@ namespace ECommerce.Models.Products
         public Category Category { get; set; }
         public int CategoryId { get; set; }
 
-        [ForeignKey("VendorId")]
-        public Vendor Vendor { get; set; }
-        public int VendorId { get; set; }
+        [ForeignKey("UserId")]
+        public User User { get; set; }
+        public int UserId { get; set; }
 
         // Navigation property to related product images
-        public ICollection<ProductImage> ProductImages { get; set; }
+        public ICollection<ProductImage>? ProductImages { get; set; }
 
         // Navigation property to related product reviews
         public ICollection<ProductReview> ProductReviews { get; set; }

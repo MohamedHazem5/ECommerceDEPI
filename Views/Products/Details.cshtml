@@ -12,7 +12,7 @@
         <p class="card-text">@Model.Description</p>
         <p><strong>Price:</strong> @Model.Price.ToString("C")</p>
         <p><strong>Quantity In Stock:</strong> @Model.QuantityInStock</p>
-        <p><strong>Vendor:</strong> @Model.Vendor?.Name</p>
+        <p><strong>Vendor:</strong> @Model.User?.FirstName</p>
         <p><strong>Category:</strong> @Model.Category?.Name</p>
     </div>
 </div>

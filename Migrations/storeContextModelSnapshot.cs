@@ -222,14 +222,14 @@ namespace ECommerce.Migrations
                     b.Property<int>("QuantityInStock")
                         .HasColumnType("int");
 
-                    b.Property<int>("VendorId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("VendorId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Products");
                 });
@@ -419,29 +419,6 @@ namespace ECommerce.Migrations
                     b.ToTable("UserRole", (string)null);
                 });
 
-            modelBuilder.Entity("ECommerce.Models.Vendors.Vendor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Vendor");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
@@ -532,13 +509,13 @@ namespace ECommerce.Migrations
 
             modelBuilder.Entity("ECommerce.Models.Carts.Cart", b =>
                 {
-                    b.HasOne("ECommerce.Models.Users.User", "Customer")
+                    b.HasOne("ECommerce.Models.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ECommerce.Models.Carts.CartItem", b =>
@@ -546,13 +523,13 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Carts.Cart", "Cart")
                         .WithMany("CartItems")
                         .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ECommerce.Models.Products.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Cart");
@@ -562,13 +539,13 @@ namespace ECommerce.Migrations
 
             modelBuilder.Entity("ECommerce.Models.Orders.Order", b =>
                 {
-                    b.HasOne("ECommerce.Models.Users.User", "Customer")
+                    b.HasOne("ECommerce.Models.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Customer");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ECommerce.Models.Orders.OrderItem", b =>
@@ -576,13 +553,13 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Orders.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ECommerce.Models.Products.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -595,7 +572,7 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Orders.Order", "Order")
                         .WithMany()
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -606,7 +583,7 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Products.Product", "Product")
                         .WithMany("ProductImages")
                         .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Product");
@@ -617,18 +594,18 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Products.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ECommerce.Models.Vendors.Vendor", "Vendor")
-                        .WithMany("Products")
-                        .HasForeignKey("VendorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("ECommerce.Models.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Category");
 
-                    b.Navigation("Vendor");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ECommerce.Models.Products.ProductReview", b =>
@@ -636,18 +613,18 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Products.Product", "Product")
                         .WithMany("ProductReviews")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ECommerce.Models.Users.User", "Customer")
+                    b.HasOne("ECommerce.Models.Users.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("Customer");
-
                     b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ECommerce.Models.Users.UserRole", b =>
@@ -655,13 +632,13 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Users.Role", "Role")
                         .WithMany("UsersRole")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ECommerce.Models.Users.User", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Role");
@@ -674,7 +651,7 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Users.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -683,7 +660,7 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -692,7 +669,7 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -701,7 +678,7 @@ namespace ECommerce.Migrations
                     b.HasOne("ECommerce.Models.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -735,11 +712,6 @@ namespace ECommerce.Migrations
             modelBuilder.Entity("ECommerce.Models.Users.User", b =>
                 {
                     b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("ECommerce.Models.Vendors.Vendor", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

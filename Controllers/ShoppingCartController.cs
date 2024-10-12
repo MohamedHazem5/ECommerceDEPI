@@ -32,8 +32,8 @@ namespace ECommerce.Controllers
             }
             if (extingproduct != null)
             {
-                if (_product.QuantityInStock > extingproduct.Quantitiy)
-                { extingproduct.Quantitiy++; }
+                if (_product.QuantityInStock > extingproduct.Quantity)
+                { extingproduct.Quantity++; }
                 else
                 {
                     return RedirectToAction("Details","Products", new
@@ -46,7 +46,7 @@ namespace ECommerce.Controllers
             {
                 _cartItems.Add(new ShoppingCartItem
                 {
-                    Quantitiy = 1,
+                    Quantity = 1,
                     product = _product
                 });
             }
@@ -61,7 +61,7 @@ namespace ECommerce.Controllers
             var catviewmodel = new ShoppingCartViewItem
             {
                 Items = _cartItems,
-                TotalPrice = _cartItems.Sum(item => item.product.Price * item.Quantitiy)
+                TotalPrice = _cartItems.Sum(item => item.product.Price * item.Quantity)
             };
             return View(catviewmodel);
         }
@@ -91,16 +91,16 @@ namespace ECommerce.Controllers
             foreach (var item in _cartItems)
             {
                 var product = _db.Products.Find(item.product.Id);
-                product.QuantityInStock -= item.Quantitiy;
+                product.QuantityInStock -= item.Quantity;
                 orderitemincart.Add(new OrderItem
                 {
                     Id = item.Id,
                     ProductId=item.product.Id,
-                    Quantity=item.Quantitiy,
+                    Quantity=item.Quantity,
                     //OrderId=1,
-                    UnitPrice=Convert.ToDecimal(item.product.Price*item.Quantitiy)
+                    UnitPrice=Convert.ToDecimal(item.product.Price*item.Quantity)
                 });
-                sumtotal =sumtotal + Convert.ToDecimal(item.product.Price * item.Quantitiy);
+                sumtotal =sumtotal + Convert.ToDecimal(item.product.Price * item.Quantity);
                 _db.OrderItems.AddRange(orderitemincart);
             }
             var totals = new Order();

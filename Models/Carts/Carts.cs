@@ -12,7 +12,7 @@ namespace ECommerce.Models.Carts
         public int Id { get; set; }
 
         [ForeignKey("UserId")]
-        public User Customer { get; set; }
+        public User User { get; set; }
         public int UserId
         {
             get; set;

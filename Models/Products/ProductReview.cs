@@ -23,7 +23,7 @@ namespace ECommerce.Models.Products
         public int ProductId { get; set; }
 
         [ForeignKey("UserId")]
-        public User Customer { get; set; }
+        public User User { get; set; }
         public int UserId { get; set; }
     }
 

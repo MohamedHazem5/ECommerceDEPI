@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ECommerce.Models.Products;
-using ECommerce.Models.Vendors;
 using ECommerce.Models;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Authorization;
@@ -158,5 +157,6 @@ namespace ECommerce.Controllers
         {
             return _context.Categories.Any(e => e.Id == id);
         }
+
     }
 }

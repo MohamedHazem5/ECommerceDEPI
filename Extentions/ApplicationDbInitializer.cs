@@ -162,6 +162,61 @@ namespace ECommerce.Extensions
 
             #endregion
 
+            #region Products
+            Product product1 = new Product
+            {
+                Name = "Product 1",
+                CategoryId = 1,
+                UserId = 4, // vendor
+                Description = "Product 1 Description",
+                IsActive = true,
+                Price = 123.75m,
+                QuantityInStock = 1000,
+                
+            };
+            var product1_response = await _context.Products
+                                        .FirstOrDefaultAsync(x => x.Name == product1.Name);
+
+            if (product1_response == null)
+                _context.Products.Add(product1);
+
+            //////////////////////////////
+            Product product2 = new Product
+            {
+                Name = "Product 2",
+                CategoryId = 2,
+                UserId = 5, // vendor
+                Description = "Product 2 Description",
+                IsActive = true,
+                Price = 200.5m,
+                QuantityInStock = 500,
+
+            };
+            var product2_response = await _context.Products
+                                        .FirstOrDefaultAsync(x => x.Name == product2.Name);
+
+            if (product2_response == null)
+                _context.Products.Add(product2);
+            //////////////////////////////
+            Product product3 = new Product
+            {
+                Name = "Product 3",
+                CategoryId = 3,
+                UserId = 5, // vendor
+                Description = "Product 2 Description",
+                IsActive = true,
+                Price = 150m,
+                QuantityInStock = 350,
+
+            };
+            var product3_response = await _context.Products
+                                        .FirstOrDefaultAsync(x => x.Name == product3.Name);
+
+            if (product3_response == null)
+                _context.Products.Add(product3);
+
+            #endregion
+
             await _context.SaveChangesAsync();
 
         }

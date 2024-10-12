@@ -35,9 +35,9 @@ namespace ECommerce.Controllers
             List<Order> ordersList = new List<Order>();
             string roleName = role[0];
             if (roleName == "Admin")
-                ordersList = await _context.Orders.Include(o => o.Customer).ToListAsync();
+                ordersList = await _context.Orders.Include(o => o.User).ToListAsync();
             else if (roleName == "Customer")
-                ordersList = await _context.Orders.Where(u => u.UserId == user.Id).Include(o => o.Customer).ToListAsync();
+                ordersList = await _context.Orders.Where(u => u.UserId == user.Id).Include(o => o.User).ToListAsync();
             
             return View(ordersList);
         }
@@ -51,7 +51,7 @@ namespace ECommerce.Controllers
             }
 
             var order = await _context.Orders
-                .Include(o => o.Customer)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -147,7 +147,7 @@ namespace ECommerce.Controllers
             }
 
             var order = await _context.Orders
-                .Include(o => o.Customer)
+                .Include(o => o.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {

@@ -5,7 +5,7 @@ using System.Data;
 
 namespace ECommerce.Extensions
 {
-    public static class IdentityServiceExtentions
+    public static class IdentityServiceExtensions
     {
         public static IServiceCollection AddIdentityService(this IServiceCollection services, IConfiguration configuration)
         {

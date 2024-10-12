@@ -37,7 +37,7 @@
                 @Html.DisplayNameFor(model => model.Category)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Vendor)
+                @Html.DisplayNameFor(model => model.User)
             </th>
             <th></th>
         </tr>
@@ -64,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Vendor.Name)
+                @Html.DisplayFor(modelItem => item.User.FirstName)
             </td>
             <td>
                     @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Admin") || User.IsInRole("Vendor")))

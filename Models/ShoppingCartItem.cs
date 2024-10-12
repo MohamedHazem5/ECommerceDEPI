@@ -8,6 +8,6 @@ namespace ECommerce.Models
     {
         public int Id { get; set; }
         public Product product { get; set; }
-        public int Quantitiy {  get; set; }
+        public int Quantity {  get; set; }
     }
 }

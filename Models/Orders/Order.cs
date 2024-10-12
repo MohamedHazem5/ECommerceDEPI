@@ -21,7 +21,7 @@ namespace ECommerce.Models.Orders
         }
 
         [ForeignKey("UserId")]
-        public User Customer { get; set; }
+        public User User { get; set; }
         public int UserId 
         {
             get; set;

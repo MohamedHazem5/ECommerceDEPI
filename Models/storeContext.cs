@@ -54,8 +54,5 @@ namespace ECommerce.Models
 
         public DbSet<Products.ProductReview> ProductReviews { get; set; }
         public DbSet<Shippings.Shipping> Shippings { get; set; }
-        public DbSet<Vendors.Vendor> Vendor { get; set; }
-
-
     }
 }
