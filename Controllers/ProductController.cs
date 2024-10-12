@@ -9,15 +9,25 @@ using Microsoft.AspNetCore.DataProtection;
 using ECommerce.Models.Products;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Authorization;
+using ECommerce.Models.Users;
+using Microsoft.AspNetCore.Identity;
 
 namespace ECommerce.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly StoreContext _context;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public ProductsController(StoreContext context,IDataProtectionProvider provider)
+        public ProductsController(StoreContext context,
+                                  UserManager<User> userManager,
+                                  SignInManager<User> signInManager,
+                                  IDataProtectionProvider provider)
         {
+
+            _userManager = userManager;
+            _signInManager = signInManager;
             _context = context;
             
         }
@@ -49,19 +59,32 @@ namespace ECommerce.Controllers
 
             return View(product);
         }
+        
         [Authorize(Roles = "Admin,Vendor")]
         // GET: Products/Create
         public IActionResult Create()
         {
+            
+            var userRolesList = _context.UserRoles
+                                        .Include(u => u.Role)
+                                        .Include(u => u.User)
+                                        .Where(x=> x.Role.Name != "Customer");
+
+            var usersList = userRolesList.Select(x=> 
+                                                    new { 
+                                                    Id = x.User.Id,
+                                                    Name = x.User.FirstName 
+                                                 }).ToList();
             // Populate the dropdown list with Users
-            ViewBag.Users = new SelectList(_context.Users.ToList(), "Id", "Name"); // Id is used for saving, Name is shown to the user
-                                                                                       // Populate the dropdown list with categories
+            ViewBag.Users = new SelectList(usersList, "Id", "Name"); // Id is used for saving, Name is shown to the user
+            
+            // Populate the dropdown list with categories
             ViewBag.Categories = new SelectList(_context.Categories.ToList(), "Id", "Name"); // Id is used for saving, Name is shown to the user
 
             return View();
         }
+        
         [Authorize(Roles = "Admin,Vendor")]
-
         // POST: Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
