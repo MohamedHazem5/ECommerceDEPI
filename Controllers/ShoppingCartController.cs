@@ -20,9 +20,10 @@ namespace ECommerce.Controllers
         [HttpGet]
         public IActionResult AddtoCart(int id)
         {
-            var _product=_db.Products.Find(id);  
+            var _product=_db.Products.Find(id);
             var _cartItems=HttpContext.Session.Get<List<ShoppingCartItem>>("Cart")??new List<ShoppingCartItem>();
             var extingproduct = _cartItems.FirstOrDefault(x => x.product.Id == id);
+            var count = HttpContext.Session.Get<int>("count");
             if (_product.QuantityInStock <= 0 || _product.IsActive==false)
             {
                 return RedirectToAction("Details","Products", new
@@ -47,10 +48,13 @@ namespace ECommerce.Controllers
                 _cartItems.Add(new ShoppingCartItem
                 {
                     Quantity = 1,
+
                     product = _product
                 });
             }
+            count++;
             HttpContext.Session.Set("Cart", _cartItems);
+            HttpContext.Session.Set("count", count);
             return RedirectToAction("Index", "Products");
 
         }
@@ -69,12 +73,14 @@ namespace ECommerce.Controllers
         {
             var _cartItems = HttpContext.Session.Get<List<ShoppingCartItem>>("Cart") ?? new List<ShoppingCartItem>();
             var extingproduct = _cartItems.FirstOrDefault(x => x.product.Id == id);
+            var count = HttpContext.Session.Get<int>("count");
             if (extingproduct != null)
             {
                 _cartItems.Remove(extingproduct);
+                count -=extingproduct.Quantity;
             }
             HttpContext.Session.Set("Cart", _cartItems);
-
+            HttpContext.Session.Set("count", count);
             return RedirectToAction("ViewCart");
         }
         
@@ -112,6 +118,7 @@ namespace ECommerce.Controllers
             _db.Orders.Add(totals);
             _db.SaveChanges();
             HttpContext.Session.Set("Cart", new List<ShoppingCartItem>());
+            HttpContext.Session.Set("count", 0);
             return RedirectToAction("Index","Home");
         }
     }

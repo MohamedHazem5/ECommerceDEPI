@@ -1,5 +1,5 @@
 - Add the user's name next to the "logout" anchor.
-- Display the cart count next to the cart logo.
+- Display the cart count next to the cart logo. (Done)
 - Include a list (combo box) that allows users to sort products by price (low to high or high to low) or by date (new to old or old to new).
 - On the home page, add buttons for each category. Below these buttons, display all products with pagination or scrolling.
 - In the "Products" tab, display only the products that belong to the logged-in vendor.

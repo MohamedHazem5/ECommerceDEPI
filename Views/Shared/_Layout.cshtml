@@ -1,15 +1,23 @@
 ﻿@using ECommerce.Models.Users
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject RoleManager<Role> RoleManager
-
+@inject IHttpContextAccessor Accessor
+@{
+    var count = 0;
+}
+@{
+    count = Accessor.HttpContext.Session.Get<int>("count");
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ECommerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -199,7 +207,9 @@
                             if (User.IsInRole("Customer"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="ViewCart">View Cart</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="ViewCart">
+                                        <i class="fa-solid fa-cart-shopping"></i><span>@count</span>
+                                    </a>
                                 </li>
                             }
                         }
@@ -212,7 +222,9 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="ViewCart">View Cart</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCart" asp-action="ViewCart">
+                                    <i class="fa-solid fa-cart-shopping"></i><span>@count</span>
+                                </a>
                             </li>
                         }
                     </ul>
