@@ -1,51 +1,46 @@
 ﻿@model IEnumerable<ECommerce.Models.Users.UserRole>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "User Roles";
 }
 
-<h1>Index</h1>
+<div class="container mt-5">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.User.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.LastName)
-                </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role.Name)
-            </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new { roleId = item.RoleId, userId = item.UserId })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <a asp-action="Create" class="btn btn-primary">Create New User Role</a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">User Roles List</h4>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.First().User.FirstName)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().User.LastName)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().User.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Role.Name)</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.User.FirstName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.User.LastName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.User.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Role.Name)</td>
+                            <td class="text-center">
+                                <a asp-action="Edit" asp-route-roleId="@item.RoleId" asp-route-userId="@item.UserId" class="btn btn-warning btn-sm">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

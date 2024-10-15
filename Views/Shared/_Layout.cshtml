@@ -12,17 +12,120 @@
     <title>@ViewData["Title"] - ECommerce</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/ECommerce.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- Boxicons CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="./shop_market_icon_264199.ico" />
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .navbar {
+            background-color: #ff6b6b;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar-brand i {
+            color: #fff;
+            font-size: 1.5rem;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover {
+                color: #f8d365;
+            }
+
+        .footer {
+            background-color: #f6d365;
+            color: #fff;
+        }
+
+            .footer i {
+                font-size: 20px;
+                transition: transform 0.3s ease;
+            }
+
+                .footer i:hover {
+                    transform: scale(1.2);
+                }
+
+        .animated-link {
+            position: relative;
+        }
+
+            .animated-link::after {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: white;
+                transform: scaleX(0);
+                transition: transform 0.3s ease;
+            }
+
+            .animated-link:hover::after {
+                transform: scaleX(1);
+            }
+
+        .card {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .card:hover {
+                transform: scale(1.05);
+            }
+
+        .btn-primary {
+            background-color: #ff6b6b;
+            border-color: #ff6b6b;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #ee5253;
+                border-color: #ee5253;
+            }
+
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+        }
+
+            .footer hr {
+                border-top: 2px solid #343a40;
+            }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ECommerce</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class='bx bxs-store'></i> ECommerce
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -43,7 +146,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
                             </li>
-                          <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">DashBoard</a>
                             </li>
                         }
@@ -53,7 +156,7 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Orders</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Orders" asp-action="Index">Orders</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Shipping" asp-action="Index">Shipping</a>
@@ -113,25 +216,44 @@
                 </div>
             </div>
         </nav>
-
     </header>
 
-    <main role="main" class="container" >
-        <div class="pb-3">
-         @RenderBody()
-       </div>
-    </main>
-
-
-    <footer class="border-top footer text-muted">
+    <div class="content">
         <div class="container">
-            &copy; 2024 - ECommerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <main role="main" class="container">
+                <div class="pb-3">
+                    @RenderBody()
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <footer class="footer text-dark text-center py-2">
+        <hr class="bg-dark" />
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-2" style="font-size: 0.8rem;">
+                    <a href="#" class="text-dark text-decoration-none">ECommerce</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-2" style="font-size: 0.75rem;">
+                    <a href="#" class="text-dark text-decoration-none">Contact Us</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-2" style="font-size: 0.75rem;">
+                    <a href="#" class="text-dark text-decoration-none">Privacy Policy</a>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-2" style="font-size: 0.75rem;">
+                    <a href="#" class="text-dark me-2"><i class='bx bxl-facebook-circle'></i></a>
+                    <a href="#" class="text-dark me-2"><i class='bx bxl-twitter'></i></a>
+                    <a href="#" class="text-dark me-2"><i class='bx bxl-instagram'></i></a>
+                    <a href="#" class="text-dark me-2"><i class='bx bxl-linkedin'></i></a>
+                </div>
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/script.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

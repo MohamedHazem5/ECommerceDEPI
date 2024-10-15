@@ -4,38 +4,52 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 @inject RoleManager<Role> RoleManager
-<h2>Product Details</h2>
+
+<h2>Product Details - @Model.Name</h2>
+
 <input type="hidden" value="@Model.Id" />
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">@Model.Name</h5>
-        <p class="card-text">@Model.Description</p>
-        <p><strong>Price:</strong> @Model.Price.ToString("C")</p>
-        <p><strong>Quantity In Stock:</strong> @Model.QuantityInStock</p>
-        <p><strong>Vendor:</strong> @Model.User?.FirstName</p>
-        <p><strong>Category:</strong> @Model.Category?.Name</p>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">@Model.Name</h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">@Model.Description</p>
+                <p><strong>Price:</strong> @Model.Price.ToString("C")</p>
+                <p><strong>Quantity In Stock:</strong> @Model.QuantityInStock</p>
+                <p><strong>Vendor:</strong> @Model.User?.FirstName</p>
+                <p><strong>Category:</strong> @Model.Category?.Name</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h4>Product Images</h4>
+        @if (Model.ProductImages != null && Model.ProductImages.Any())
+        {
+            <div class="row">
+                @foreach (var image in Model.ProductImages)
+                {
+                    <div class="col-md-6 mb-3">
+                        <img src="data:image/png;base64,@Convert.ToBase64String(image.ImageData)"
+                             alt="Product Image"
+                             class="img-fluid"
+                             style="width: 100%; height: auto;" />
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <p>No images available for this product.</p>
+        }
     </div>
 </div>
-@if ( !(User.IsInRole("Admin") || User.IsInRole("Vendor")))
+
+@if (!User.Identity.IsAuthenticated || User.IsInRole("Customer"))
 {
     <a asp-controller="ShoppingCart" asp-action="AddtoCart" asp-route-id="@Model.Id" class="btn btn-primary">Add To Cart</a>
 }
-<h4>Product Images</h4>
-<div class="row">
-    @if (Model.ProductImages != null && Model.ProductImages.Any())
-    {
-        foreach (var image in Model.ProductImages)
-        {
-            <div class="col-md-4 mb-3">
-                <img src="data:image/png;base64,@Convert.ToBase64String(image.ImageData)"
-                     alt="Product Image"
-                     class="img-fluid"
-                     style="width: 100%; height: auto;" />
-            </div>
-        }
-    }
-    else
-    {
-        <p>No images available for this product.</p>
-    }
-</div>
+
+<a asp-controller="Products" asp-action="Index" class="btn btn-secondary">Back to Products</a>

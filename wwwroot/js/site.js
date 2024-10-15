@@ -21,7 +21,35 @@ pwShowHide.forEach(eyeIcon => {
 
 links.forEach(link => {
     link.addEventListener("click", e => {
-        e.preventDefault(); //preventing form submit
+        e.preventDefault();
         forms.classList.toggle("show-signup");
     })
 })
+
+
+/*/////////////////////////////////////////////////////////////////////////////////////*//**/
+/*/////////////////////////////////////////////////////////////////////////////////////*//**/
+/*/////////////////////////////////////////////////////////////////////////////////////*//**/
+/*/////////////////////////////////////////////////////////////////////////////////////*//**/
+/*/////////////////////////////////////////////////////////////////////////////////////*//**/
+const text = "Welcome in my ECommerce";
+
+const welcomeText = document.getElementById('welcome-text');
+
+function typeWriter(text, element, delay = 100) {
+    let i = 0;
+    element.style.opacity = 1;
+    function typingEffect() {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typingEffect, delay);
+        }
+    }
+    typingEffect();
+}
+
+window.onload = function () {
+    typeWriter(text, welcomeText, 150);
+};
+

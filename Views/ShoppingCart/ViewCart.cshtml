@@ -6,47 +6,121 @@
 @inject UserManager<User> UserManager
 @inject RoleManager<Role> RoleManager
 
-<h1>Shopping Cart</h1>
-<table class="table">
-    <thead>
-        <tr>
+<style>
+    body {
+        background-color: #f8f9fa; /* Light gray background */
+        font-family: 'Arial', sans-serif;
+    }
 
-            <td>Product Name</td>
-            <td>Product Price</td>
-            <td>Quantity</td>
-            <td>Total Price</td>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach(var item in Model.Items)
-        {
-            <tr>
-               @*  <td>@item.product.Category.Name</td> *@
-                <td>@item.product.Name</td>
-                <td>@item.product.Price</td>
-                <td>@item.Quantity</td>
-                <td>@((item.product.Price*item.Quantity).ToString("C"))</td>
-                <input type="hidden" value="@item.product.Id"/>
-                <td><a asp-controller="ShoppingCart" asp-action="AddtoCart" asp-route-id="@item.product.Id" class="btn btn-outline-primary">Add</a>|
-                    <a asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-id="@item.product.Id" class="btn btn-danger">Remove</a>
-                </td>
-            </tr>
+    h1 {
+        text-align: center;
+        color: #343a40; /* Dark gray */
+        margin-bottom: 30px;
+    }
+
+    .table {
+        background-color: #ffffff; /* White background for the table */
+        border-radius: 10px;
+        overflow: hidden; /* For border-radius to work */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    th, td {
+        text-align: center;
+        padding: 15px;
+        color: #495057; /* Medium gray */
+    }
+
+    th {
+        background-color: #007bff; /* Blue background for header */
+        color: white;
+    }
+
+    .btn {
+        border-radius: 5px;
+        padding: 10px 15px;
+        margin: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-outline-primary {
+        border-color: #007bff;
+        color: #007bff;
+    }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: white;
         }
-        <tr>
-            <td></td>
-            <td></td>
-            <td>Total: </td>
-            <td>@Model.TotalPrice?.ToString("C")</td>
-        </tr>
-        
-    </tbody>
-</table>
-@if (SignInManager.IsSignedIn(User) && User.IsInRole("Customer"))
-{
-    <tr><a asp-controller="ShoppingCart" asp-action="Purchase" class="btn btn-info">proceed to purchase</a></tr>
-}
-else
-{
-    <tr><a asp-controller="Account" asp-action="Login" class="btn btn-info">proceed to purchase</a></tr>
 
-}
+    .btn-danger {
+        background-color: #dc3545; /* Red */
+        border: none;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333; /* Darker red */
+        }
+
+    .btn-info {
+        background-color: #17a2b8; /* Teal */
+        border: none;
+    }
+
+        .btn-info:hover {
+            background-color: #138496; /* Darker teal */
+        }
+
+    .total-row {
+        font-weight: bold;
+    }
+</style>
+
+<h1>Shopping Cart</h1>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Product Price</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.product.Name</td>
+                    <td>@item.product.Price.ToString("C")</td>
+                    <td>@item.Quantity</td>
+                    <td>@((item.product.Price * item.Quantity).ToString("C"))</td>
+                    <td>
+                        <input type="hidden" value="@item.product.Id" />
+                        <a asp-controller="ShoppingCart" asp-action="AddtoCart" asp-route-id="@item.product.Id" class="btn btn-outline-primary">Add</a> |
+                        <a asp-controller="ShoppingCart" asp-action="RemoveFromCart" asp-route-id="@item.product.Id" class="btn btn-danger">Remove</a>
+                    </td>
+                </tr>
+            }
+            <tr class="total-row">
+                <td colspan="3">Total:</td>
+                <td>@Model.TotalPrice?.ToString("C")</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Customer"))
+        {
+            <a asp-controller="ShoppingCart" asp-action="Purchase" class="btn btn-info">Proceed to Purchase</a>
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Login" class="btn btn-info">Login to Purchase</a>
+        }
+    </div>
+</div>

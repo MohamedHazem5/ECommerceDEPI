@@ -2,7 +2,151 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="welcome-container text-center my-5">
+    <h1 id="welcome-text">Welcome to Our Store </h1>
 </div>
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Card 1 - Electronics -->
+        <div class="col-lg-3 col-md-4 col-sm-6 my-3">
+            <div class="card shadow-sm h-100">
+                <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" class="card-img-top" alt="Luxury Perfume">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Luxury Perfume</h5>
+                    <p class="card-text">A sophisticated and long-lasting fragrance for special moments.</p>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 - Fashion -->
+        <div class="col-lg-3 col-md-4 col-sm-6 my-3">
+            <div class="card shadow-sm h-100">
+                <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" class="card-img-top" alt="Luxury Perfume">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Luxury Perfume</h5>
+                    <p class="card-text">A sophisticated and long-lasting fragrance for special moments.</p>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 - Beauty -->
+        <div class="col-lg-3 col-md-4 col-sm-6 my-3">
+            <div class="card shadow-sm h-100">
+                <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" class="card-img-top" alt="Luxury Perfume">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Luxury Perfume</h5>
+                    <p class="card-text">A sophisticated and long-lasting fragrance for special moments.</p>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 - Home Appliances -->
+        <div class="col-lg-3 col-md-4 col-sm-6 my-3">
+            <div class="card shadow-sm h-100">
+                <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" class="card-img-top" alt="Luxury Perfume">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Luxury Perfume</h5>
+                    <p class="card-text">A sophisticated and long-lasting fragrance for special moments.</p>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 5 - Toys -->
+        <div class="col-lg-3 col-md-4 col-sm-6 my-3">
+            <div class="card shadow-sm h-100">
+                <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" class="card-img-top" alt="Luxury Perfume">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Luxury Perfume</h5>
+                    <p class="card-text">A sophisticated and long-lasting fragrance for special moments.</p>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 6 - Sports -->
+        <div class="col-lg-3 col-md-4 col-sm-6 my-3">
+            <div class="card shadow-sm h-100">
+                <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" class="card-img-top" alt="Luxury Perfume">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Luxury Perfume</h5>
+                    <p class="card-text">A sophisticated and long-lasting fragrance for special moments.</p>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 7 - Books -->
+        <div class="col-lg-3 col-md-4 col-sm-6 my-3">
+            <div class="card shadow-sm h-100">
+                <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" class="card-img-top" alt="Luxury Perfume">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Luxury Perfume</h5>
+                    <p class="card-text">A sophisticated and long-lasting fragrance for special moments.</p>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 8 - Footwear -->
+        <div class="col-lg-3 col-md-4 col-sm-6 my-3">
+            <div class="card shadow-sm h-100">
+                <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783" class="card-img-top" alt="Luxury Perfume">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Luxury Perfume</h5>
+                    <p class="card-text">A sophisticated and long-lasting fragrance for special moments.</p>
+                    <a href="#" class="btn btn-primary">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .welcome-container {
+        background-color: #1a1a2e;
+        padding: 50px 0;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .card {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+        color: white;
+        border-radius: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease; /* تحسين الحركة */
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* إضافة ظل عند التحويم */
+        }
+
+    .card-img-top {
+        border-radius: 10px 10px 0 0;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        background-color: #ff6b6b;
+        border-color: #ff6b6b;
+    }
+
+        .btn-primary:hover {
+            background-color: #ee5253;
+            border-color: #ee5253;
+        }
+</style>

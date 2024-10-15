@@ -68,7 +68,7 @@ namespace ECommerce.Controllers
             var userRolesList = _context.UserRoles
                                         .Include(u => u.Role)
                                         .Include(u => u.User)
-                                        .Where(x=> x.Role.Name != "Customer");
+                                        .Where(x=> x.Role.Name == "Vendor");
 
             var usersList = userRolesList.Select(x=> 
                                                     new { 

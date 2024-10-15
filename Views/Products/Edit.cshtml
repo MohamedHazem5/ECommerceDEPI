@@ -1,66 +1,101 @@
 ﻿@model ECommerce.Models.Products.Product
 
-<h2>Edit Product</h2>
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<input type="hidden" asp-for="UserId" />
+<div class="container my-5">
+    <h1 class="text-center mb-4">Edit Product</h1>
+    <hr />
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form asp-action="Edit" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
 
-<form asp-action="Edit" enctype="multipart/form-data" method="post">
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Price"></label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="QuantityInStock"></label>
-        <input asp-for="QuantityInStock" class="form-control" />
-        <span asp-validation-for="QuantityInStock" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="IsActive"></label>
-        <input asp-for="IsActive" type="checkbox" />
-    </div>
-    <div class="form-group">
-        <label asp-for="UserId"></label>
-        <select asp-for="UserId" class="form-control" asp-items="ViewBag.Users"></select>
-    </div>
-    <div class="form-group">
-        <label asp-for="CategoryId"></label>
-        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
-    </div>
+                <!-- Product Name -->
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="form-label">Product Name</label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter product name" required />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
 
-    <div class="form-group">
-        <label>Current Images</label><br />
-        @if (Model.ProductImages != null && Model.ProductImages.Any())
-        {
-            foreach (var image in Model.ProductImages)
-            {
-                <img src="data:image/png;base64,@Convert.ToBase64String(image.ImageData)" alt="Product Image" style="width: 200px; height: auto; margin-right: 10px;" />
-            }
-        }
-        else
-        {
-            <p>No images uploaded.</p>
-        }
-    </div>
+                <!-- Description -->
+                <div class="form-group mb-3">
+                    <label asp-for="Description" class="form-label">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter product description" required></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
 
-    <div class="form-group">
-        <label for="ImageUploads">Upload New Images</label>
-        <input type="file" name="ImageUploads" id="ImageUploads" class="form-control" multiple />
-        <small class="form-text text-muted">Hold down Ctrl (Windows) or Command (Mac) to select multiple files.</small>
-    </div>
+                <!-- Price -->
+                <div class="form-group mb-3">
+                    <label asp-for="Price" class="form-label">Price</label>
+                    <input asp-for="Price" class="form-control" placeholder="Enter price" required />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
 
-    <input type="hidden" asp-for="Id" />
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+                <!-- Quantity in Stock -->
+                <div class="form-group mb-3">
+                    <label asp-for="QuantityInStock" class="form-label">Quantity in Stock</label>
+                    <input asp-for="QuantityInStock" class="form-control" placeholder="Enter stock quantity" required />
+                    <span asp-validation-for="QuantityInStock" class="text-danger"></span>
+                </div>
+
+                <!-- Is Active -->
+                <div class="form-group form-check mb-3">
+                    <input asp-for="IsActive" type="checkbox" class="form-check-input" />
+                    <label asp-for="IsActive" class="form-check-label">Is Active</label>
+                </div>
+
+                <!-- Vendor Dropdown -->
+                <div class="form-group">
+                    <label asp-for="UserId"></label>
+                    <select asp-for="UserId" class="form-control" asp-items="ViewBag.Users"></select>
+                </div>
+
+                <!-- Category Dropdown -->
+                <div class="form-group mb-3">
+                    <label asp-for="CategoryId" class="form-label">Category</label>
+                    <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.Categories" required></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+
+                <!-- Current Images -->
+                <div class="form-group mb-3">
+                    <label>Current Images</label>
+                    <div class="d-flex flex-wrap">
+                        @if (Model.ProductImages != null && Model.ProductImages.Any())
+                        {
+                            foreach (var image in Model.ProductImages)
+                            {
+                                <img src="data:image/png;base64,@Convert.ToBase64String(image.ImageData)" alt="Product Image" style="width: 200px; height: auto; margin-right: 10px;" />
+                            }
+                        }
+                        else
+                        {
+                            <p>No images uploaded.</p>
+                        }
+                    </div>
+                </div>
+
+                <!-- Upload New Images -->
+                <div class="form-group mb-3">
+                    <label for="ImageUploads" class="form-label">Upload New Images</label>
+                    <input type="file" name="ImageUploads" id="ImageUploads" class="form-control" multiple />
+                    <small class="form-text text-muted">Hold down Ctrl (Windows) or Command (Mac) to select multiple files.</small>
+                </div>
+
+                <!-- Hidden ID Field -->
+                <input type="hidden" asp-for="Id" />
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
