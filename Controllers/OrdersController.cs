@@ -52,10 +52,15 @@ namespace ECommerce.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.User)
+                .Include(od => od.OrderItems)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
                 return NotFound();
+            }
+            foreach (var item in order.OrderItems)
+            {
+                item.Product = await _context.Products.FirstOrDefaultAsync(x=> x.Id == item.ProductId);
             }
 
             return View(order);
