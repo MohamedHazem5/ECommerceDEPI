@@ -56,7 +56,7 @@ namespace ECommerce.Extensions
                     UserName = customer1Email.Substring(0, customer1Email.IndexOf("@")),
                     Email = customer1Email,
                     FirstName = "customer1",
-                    LastName = "customer1",
+                    LastName = "customer1 Last Name",
                     EmailConfirmed = true
                 };
 
@@ -77,7 +77,7 @@ namespace ECommerce.Extensions
                     UserName = customer2Email.Substring(0, customer2Email.IndexOf("@")),
                     Email = customer2Email,
                     FirstName = "customer2",
-                    LastName = "customer2",
+                    LastName = "customer2 Last Name",
                     EmailConfirmed = true
                 };
 
@@ -98,7 +98,7 @@ namespace ECommerce.Extensions
                     UserName = vendor1Email.Substring(0, vendor1Email.IndexOf("@")),
                     Email = vendor1Email,
                     FirstName = "vendor1",
-                    LastName = "vendor1",
+                    LastName = "vendor1 Last Name",
                     EmailConfirmed = true
                 };
 
@@ -119,7 +119,7 @@ namespace ECommerce.Extensions
                     UserName = vendor2Email.Substring(0, vendor2Email.IndexOf("@")),
                     Email = vendor2Email,
                     FirstName = "vendor2",
-                    LastName = "vendor2",
+                    LastName = "vendor2 Last Name",
                     EmailConfirmed = true
                 };
 

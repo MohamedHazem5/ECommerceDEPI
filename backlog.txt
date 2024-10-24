@@ -7,3 +7,4 @@
 5 - In the "Products" tab, display only the products that belong to the logged-in vendor.
 6 - In the "Orders" section, include information about selected orders for administrators and the shipping status of each order.
 7 - Provide administrators with access to all controllers.
+8 - Replace all existing int Id fields with Guid Id fields to ensure unique and globally recognizable identifiers.

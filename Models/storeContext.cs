@@ -45,6 +45,7 @@ namespace ECommerce.Models
 
         public DbSet<Orders.Order> Orders { get; set; }
         public DbSet<Orders.OrderItem> OrderItems { get; set; }
+        public DbSet<Orders.OrderStatusHistory> OrderStatusHistories { get; set; }
 
         public DbSet<Payments.Payment> Payments { get; set; }
         public DbSet<Products.Category> Categories { get; set; }
