@@ -1,8 +1,8 @@
 ﻿
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using ECommerce.Models.Users;
 using ECommerce.Models._Enums;
+using ECommerce.Models.Users;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce.Models.Orders
 {
@@ -23,15 +23,16 @@ namespace ECommerce.Models.Orders
 
         [ForeignKey("UserId")]
         public User User { get; set; }
-        public int UserId 
+        public int UserId
         {
             get; set;
         }
+
         private OrderStatus _status;
-        public OrderStatus? Status 
-        {   
+        public OrderStatus? Status
+        {
             get { return _status; }
-            set 
+            set
             {
                 if (value == null)
                 {
@@ -41,14 +42,20 @@ namespace ECommerce.Models.Orders
                 {
                     _status = value.Value;
                 }
-            } 
+            }
         }
-        private int myVar;
+        private int _companyShippingId;
 
-        public int MyProperty
+        public int? CompanyShippingId
         {
-            get { return myVar; }
-            set { myVar = value; }
+            get { return _companyShippingId; }
+            set
+            {
+                if (value == null)
+                    _companyShippingId = 0;
+                else
+                    _companyShippingId = value.Value;
+            }
         }
 
         // Navigation property to related order items

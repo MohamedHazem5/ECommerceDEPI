@@ -1,0 +1,94 @@
+﻿@model ECommerce.Models.ViewModels.CompanyViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Company</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.Name" class="control-label"></label>
+                <input asp-for="@Model.Company.Name" class="form-control" />
+                <span asp-validation-for="@Model.Company.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.Address" class="control-label"></label>
+                <input asp-for="@Model.Company.Address" class="form-control" />
+                <span asp-validation-for="@Model.Company.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.Industry" class="control-label"></label>
+                <input asp-for="@Model.Company.Industry" class="form-control" />
+                <span asp-validation-for="@Model.Company.Industry" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.CompanySizes" class="control-label"></label>
+                <select asp-for="@Model.Company.Size" asp-items="@Model.CompanySizes" class="form-control"></select>
+                <span asp-validation-for="@Model.Company.Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.FoundedDate" class="control-label"></label>
+                <input asp-for="@Model.Company.FoundedDate" class="form-control" />
+                <span asp-validation-for="@Model.Company.FoundedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.Website" class="control-label"></label>
+                <input asp-for="@Model.Company.Website" class="form-control" />
+                <span asp-validation-for="@Model.Company.Website" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.Logo" class="control-label"></label>
+                <input asp-for="@Model.Company.Logo" class="form-control" />
+                <span asp-validation-for="@Model.Company.Logo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.NumberOfEmployees" class="control-label"></label>
+                <input asp-for="@Model.Company.NumberOfEmployees" class="form-control" />
+                <span asp-validation-for="@Model.Company.NumberOfEmployees" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.TaxID" class="control-label"></label>
+                <input asp-for="@Model.Company.TaxID" class="form-control" />
+                <span asp-validation-for="@Model.Company.TaxID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.RegistrationNumber" class="control-label"></label>
+                <input asp-for="@Model.Company.RegistrationNumber" class="form-control" />
+                <span asp-validation-for="@Model.Company.RegistrationNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.LegalStatus" class="control-label"></label>
+                <select asp-for="@Model.Company.LegalStatus" asp-items="@Model.LegalStatuses" class="form-control"></select>
+                <span asp-validation-for="@Model.Company.LegalStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.CEO" class="control-label"></label>
+                <input asp-for="@Model.Company.CEO" class="form-control" />
+                <span asp-validation-for="@Model.Company.CEO" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Company.Notes" class="control-label"></label>
+                <input asp-for="@Model.Company.Notes" class="form-control" />
+                <span asp-validation-for="@Model.Company.Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

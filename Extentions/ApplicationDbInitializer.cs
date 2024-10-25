@@ -1,5 +1,7 @@
 ﻿using ECommerce.Models;
+using ECommerce.Models.Companies;
 using ECommerce.Models.Products;
+using ECommerce.Models.Shipping;
 using ECommerce.Models.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -215,6 +217,53 @@ namespace ECommerce.Extensions
             if (product3_response == null)
                 _context.Products.Add(product3);
 
+            #endregion
+
+            #region Company
+            Company companyDHL = new Company
+            {
+                Name = "DHL",
+                
+            };
+            var companyDHL_response = await _context.Companies
+                                        .FirstOrDefaultAsync(x => x.Name == companyDHL.Name);
+            if (companyDHL_response == null)
+                _context.Companies.Add(companyDHL);
+            Company fedExCompany = new Company
+            {
+                Name = "FedEx",
+
+            };
+            var fedExCompany_response = await _context.Companies
+                                        .FirstOrDefaultAsync(x => x.Name == fedExCompany.Name);
+            if (fedExCompany_response == null)
+                _context.Companies.Add(fedExCompany);
+            #endregion
+
+            #region CompanyShipping
+            CompanyShipping CompanyShippingDHL = new CompanyShipping
+            {
+                CompanyId = 1,
+                ShippingName = "DHL Express",
+                IsActive = true,
+
+            };
+            var CompanyShippingDHL_response = await _context.Companies
+                                        .FirstOrDefaultAsync(x => x.Name == CompanyShippingDHL.ShippingName);
+            if (CompanyShippingDHL_response == null)
+                _context.CompaniesShipping.Add(CompanyShippingDHL);
+            
+            CompanyShipping fedExCompanyShipping = new CompanyShipping
+            {
+                CompanyId = 2,
+                ShippingName = "Fed Express",
+                IsActive = true,
+
+            };
+            var fedExCompanyShipping_response = await _context.Companies
+                                        .FirstOrDefaultAsync(x => x.Name == fedExCompanyShipping.ShippingName);
+            if (fedExCompanyShipping_response == null)
+                _context.CompaniesShipping.Add(fedExCompanyShipping);
             #endregion
 
             await _context.SaveChangesAsync();

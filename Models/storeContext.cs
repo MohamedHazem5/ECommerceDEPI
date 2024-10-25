@@ -3,6 +3,9 @@ using ECommerce.Models.Users;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ECommerce.Models.Products;
+using ECommerce.Models.Shipping;
+using ECommerce.Models.Companies;
 
 namespace ECommerce.Models
 {
@@ -53,7 +56,9 @@ namespace ECommerce.Models
         public DbSet<Products.Product> Products { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
 
-        public DbSet<Products.ProductReview> ProductReviews { get; set; }
-        public DbSet<Shippings.Shipping> Shippings { get; set; }
+        public DbSet<ProductReview> ProductReviews { get; set; }
+        
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyShipping> CompaniesShipping { get; set; }
     }
 }
