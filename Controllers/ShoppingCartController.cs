@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using ECommerce.Models.Orders;
 using Microsoft.AspNetCore.Identity;
 using ECommerce.Models.Users;
+using ECommerce.Models._Enums;
 namespace ECommerce.Controllers
 {
     public class ShoppingCartController : Controller
@@ -115,7 +116,17 @@ namespace ECommerce.Controllers
             totals.OrderDate = DateTime.Now;
             totals.OrderItems= orderitemincart;
             totals.TotalAmount=sumtotal;
+            totals.Status=OrderStatus.Pending;
+            totals.CompanyShippingId = 1;
             _db.Orders.Add(totals);
+            _db.SaveChanges();
+            OrderStatusHistory stat=new OrderStatusHistory();
+            stat.OrderId=totals.Id;
+            stat.UserId= user.Id;
+            stat.ChangeDate= DateTime.Now;
+            stat.OldStatus = OrderStatus.Pending;
+            stat.NewStatus = OrderStatus.Pending;
+            _db.OrderStatusHistories.Add(stat);
             _db.SaveChanges();
             HttpContext.Session.Set("Cart", new List<ShoppingCartItem>());
             HttpContext.Session.Set("count", 0);
